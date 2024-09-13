@@ -1,0 +1,13 @@
+@EndUserText.label: 'ZLAM_AB_SD_APPROVER'
+define service ZLAM_AB_SD_APPROVER {
+  expose ZLAM_AB_TRAVEL_APPROVER    as Travel;
+  expose ZLAM_AB_BOOKING_APPROVER   as Booking;
+  expose ZLAM_AB_BOOKSUPPL_APPROVER as BookSupplement;
+  expose /DMO/I_Agency              as Agency;
+  expose /DMO/I_Customer            as Customer;
+  expose /DMO/I_Carrier             as Carrier;
+  expose /DMO/I_Connection          as Connection;
+  expose /DMO/I_Supplement          as SupplText;
+  expose /DMO/I_Overall_Status_VH   as OverallStatus;
+  expose /DMO/I_Booking_Status_VH   as BookingStatus;
+}

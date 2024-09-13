@@ -1,0 +1,115 @@
+
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo:{ 
+    typeName: 'Travel',
+    typeNamePlural: 'Travels',
+    title: { value: 'TravelId' },
+    description: { value: 'CustomerId' }
+        
+}
+annotate view ZLAM_AB_TRAVEL_APPROVER
+    with 
+{
+    @UI.facet: [{ 
+        id: 'TravelHeaderPrice',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        position: 10,
+        targetQualifier: 'PriceData'
+    },{ 
+        id: 'TravelHeaderStatus',
+        purpose: #HEADER,
+        type: #DATAPOINT_REFERENCE,
+        position: 20,
+        targetQualifier: 'StatusData'
+    },{ 
+        id:'GeneralInfo',
+        type: #COLLECTION,
+        label: 'General Info',
+        position: 10
+    },{ 
+        id:'Travel',
+        type: #IDENTIFICATION_REFERENCE,
+        purpose: #STANDARD,
+        label: 'General Data',
+        parentId: 'GeneralInfo',
+        position: 10
+    },{ 
+        id:'Dates',
+        type: #FIELDGROUP_REFERENCE,
+        purpose: #STANDARD,
+        label: 'Dates Data',
+        parentId: 'GeneralInfo',
+        position: 20,
+        targetQualifier: 'DatesGroup'
+    },{ 
+        id:'Prices',
+        type: #FIELDGROUP_REFERENCE,
+        purpose: #STANDARD,
+        label: 'Price Data',
+        parentId: 'GeneralInfo',
+        position: 30,
+        targetQualifier: 'PriceGroup'
+    },
+                { 
+                    purpose: #STANDARD,
+                    type: #LINEITEM_REFERENCE,
+                    label: 'Bookings',
+                    position: 20,
+                    targetElement: '_Booking'
+                }]
+
+    @UI : { selectionField: [{position: 10 }] ,
+            lineItem: [{ position: 10 },
+            { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Approve' },
+            { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject' }],
+            identification: [{position: 10 },
+            { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Approve' },
+            { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject' }] }
+    TravelId;
+    @UI : { selectionField: [{position: 20 }] ,
+            lineItem: [{ position: 20 }],
+            identification: [{position: 20 }] }
+    AgencyId;
+    @UI : { selectionField: [{position: 30 }] ,
+            lineItem: [{ position: 30 }],
+            identification: [{position: 30 }] }
+    CustomerId;
+    @UI : { selectionField: [{position: 40 }] ,
+            lineItem: [{ position: 40 }] }
+    @UI.fieldGroup: [{position: 10, qualifier: 'DatesGroup' }]
+    BeginDate;
+    
+    @UI.lineItem: [{ position: 50 }]
+    @UI.dataPoint: {  qualifier: 'PriceData', title: 'Price Data' }
+    @UI.fieldGroup: [{position: 10, qualifier: 'PriceGroup' }]
+    TotalPrice;
+    @UI.lineItem: [{ position: 51 }]
+    CurrencyCode;
+//    @UI.lineItem: [{ position: 11 }]
+//    Description;
+    @UI.selectionField: [{position: 50 }]
+    @UI.lineItem: [{ position: 60, importance: #HIGH, criticality: 'Criticality' }]
+    @UI.identification: [{position: 40 }]
+    @UI.textArrangement: #TEXT_ONLY
+    @UI.dataPoint: {  qualifier: 'StatusData', title: 'Travel Status' }
+    OverallStatus;
+    
+    @UI.lineItem: [{ position: 70 }]
+    
+//    Lastchangedat;
+    
+//    Createdby;
+//      Createdat;
+//    Lastchangedby;
+    @UI.fieldGroup: [{position: 20, qualifier: 'DatesGroup' }]
+    EndDate;
+    @UI.fieldGroup: [{position: 20, qualifier: 'PriceGroup' }]
+    BookingFee;
+//    /* Associations */
+//    _Agency;
+//    _Currency;
+//    _Customer;
+
+    
+}

@@ -1,0 +1,33 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZLAM_AB_TRAVEL_APPROVER alias Travel
+{
+  use update;
+  field ( readonly ) TravelId, AgencyId, CustomerId, BeginDate,
+  EndDate, TotalPrice, Description;
+
+  use action acceptTravel;
+  use action rejectTravel;
+
+  use action Prepare;
+  use action Edit;
+  use action Resume;
+  use action Activate;
+  use action Discard;
+
+  use association _Booking;
+}
+
+define behavior for ZLAM_AB_BOOKING_APPROVER alias Booking
+{
+  use association _Travel;
+  use association _BookingSupplement;
+}
+
+define behavior for ZLAM_AB_BOOKSUPPL_APPROVER alias BookingSupplement
+{
+  use association _Travel;
+  use association _Booking;
+}
